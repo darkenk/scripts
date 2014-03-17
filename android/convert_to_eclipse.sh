@@ -73,7 +73,7 @@ function _main_ {
         cproject=`echo -n "$cproject" | xmlstarlet ed -s ${var} -t elem -n listOptionValueTmp -v "" -i //listOptionValueTmp -t attr -n builtIn -v "false" -i //listOptionValueTmp -t attr -n "value" -v "$i" -r //listOptionValueTmp -v listOptionValue`
     done
     
-    local include_files=`grep -o -E "\-include [^ ]*" log | sort -u | sed -e 's/-include //'`
+    local include_files=`grep -o -E "\-include [^ ]*" ${make_output} | sort -u | sed -e 's/-include //'`
     var=/cproject/storageModule/cconfiguration/storageModule/configuration/folderInfo/toolChain/tool/option[@valueType=\'includeFiles\']
     
     for i in ${include_files}
