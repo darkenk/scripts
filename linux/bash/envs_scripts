@@ -1,0 +1,24 @@
+D_STARTUP_SCRIPT=setup_env.sh
+D_PRIVATE_ENV=private
+D_PUBLIC_ENV=public
+function dsetup_env {
+    if [ 1 -ne $# ]; then
+        echo "Usage: dsetup_env workspace_name. Abort"
+        return
+    fi
+    local startup="${D_ENV_DIR}/${D_PRIVATE_ENV}/$1/${D_STARTUP_SCRIPT}"
+    if [ ! -f "${startup}" ]; then
+        startup="${D_ENV_DIR}/${D_PUBLIC_ENV}/$1/${D_STARTUP_SCRIPT}"
+        if [ ! -f ${startup} ]; then
+            echo "${startup} or "${D_ENV_DIR}/${D_PRIVATE_ENV}/$1/${D_STARTUP_SCRIPT}" does not exist. Abort"
+            return
+        fi
+    fi
+    export DCUR_WORKSPACE=$1
+    export DCUR_WORKSPACE_DIR=$(dirname ${startup})
+    echo "Starting new env with ${startup}"
+    bash --rcfile "${startup}"
+    unset DCUR_WORKSPACE
+    unset DCUR_WORKSPACE_DIR
+    echo -en '\e]0;no env\a'
+}
