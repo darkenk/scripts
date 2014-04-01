@@ -34,16 +34,20 @@
 echo "Generate project for $1"
 
 function _main_ {
+    local dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+    local project_out_dir=eclipse
     local project_path="$1"
     local new_project_name=`basename ${project_path}`
-    local template_project="tmpproject"
+    local template_project="${dir}/tmpproject"
     local path_to_new_project="/tmp/.project"
     local path_to_new_cproject="/tmp/.cproject"
-    local template_cproject="tmpcproject"
+    local template_cproject="${dir}/tmpcproject"
     local make_output="/tmp/log"
-    local android_root=/`echo ${project_path} | sed -r -e 's/[^\/]+/\.\./g' | sed -r -e 's/.+\.$/\0\//'`
+    local android_root=/../`echo ${project_path} | sed -r -e 's/[^\/]+/\.\./g' | sed -r -e 's/.+\.$/\0\//'`
     
-    xmlstarlet ed -u /projectDescription/name -v ${new_project_name} ${template_project} > ${path_to_new_project}
+    xmlstarlet ed -u /projectDescription/name -v ${new_project_name} ${template_project} | \
+    xmlstarlet ed -u /projectDescription/linkedResources/link/name -v ${new_project_name} | \
+    xmlstarlet ed -u /projectDescription/linkedResources/link/locationURI -v PARENT-5-PROJECT_LOC/${project_path} > ${path_to_new_project}
     local cproject=`xmlstarlet ed -u /cproject/storageModule/cconfiguration/storageModule/configuration/@artifactName -v ${new_project_name} ${template_cproject} | \
     xmlstarlet ed -u /cproject/storageModule/project/@id -v ${new_project_name}.null.1967302977 | \
     xmlstarlet ed -u /cproject/storageModule/project/@name -v ${new_project_name} | \
@@ -52,7 +56,7 @@ function _main_ {
     mmm -B showcommands ${project_path} &> ${make_output}
     
     local includes=`grep -E "g\+\+|gcc " ${make_output} | grep -o -E "(\-I [^ ]*)|(\-isystem [^ ]*)" | sort -u | sed -r -e "s/[^ ]* (.*)/\1/"`
-    local var=/cproject/storageModule/cconfiguration/storageModule/configuration/folderInfo/toolChain/tool/option[@valueType=\'includePath\']
+    var=/cproject/storageModule/cconfiguration/storageModule/configuration/folderInfo/toolChain/tool/option[@valueType=\'includePath\']
     
     #TODO: read below values from g++
     #grep --color -o -E -m  1 "[^ ]*arm-linux-androideabi-g\+\+" ${make_output}
@@ -82,10 +86,12 @@ function _main_ {
     done
     
     echo -n "${cproject}" > ${path_to_new_cproject}
-    mv ${path_to_new_cproject} ${project_path}
-    mv ${path_to_new_project} ${project_path}
+    mkdir -p ${project_out_dir}/${project_path}
+    mv ${path_to_new_cproject} ${project_out_dir}/${project_path}
+    mv ${path_to_new_project} ${project_out_dir}/${project_path}
     
     rm ${make_output}
+    echo "Project saved to ${project_out_dir}/${project_path}"
 }
 type mmm &> /dev/null
 if [ $? -eq 1 ]; then

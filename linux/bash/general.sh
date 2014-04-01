@@ -39,7 +39,7 @@ function deditScripts {
 }
 
 function dgetCurrentDir {
-    return $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+    echo $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 }
 
 function dloadScripts {
@@ -55,7 +55,7 @@ function dloadScripts {
     done
 }
 
-dsave_function() {
+dsave_function () {
     local ORIG_FUNC=$(declare -f $1)
     local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
     eval "$NEWNAME_FUNC"
@@ -66,6 +66,11 @@ dhighlight () {
     local LINE="\x1b[1;33m";
     local NORMAL="\x1b[0;0m";
     sed -re "s/(.*)($1)(.*)/$LINE\1$MATCH\2$LINE\3$NORMAL/"
+}
+
+function dconvert_to_eclipse() {
+    local path=$(dgetCurrentDir)
+    source ${path}/../../android/convert_to_eclipse.sh $@
 }
 
 alias ls='ls --color=auto'
