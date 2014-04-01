@@ -54,3 +54,19 @@ function dloadScripts {
         fi
     done
 }
+
+dsave_function() {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+
+dhighlight () {
+    local MATCH="\x1b[1;31m";
+    local LINE="\x1b[1;33m";
+    local NORMAL="\x1b[0;0m";
+    sed -re "s/(.*)($1)(.*)/$LINE\1$MATCH\2$LINE\3$NORMAL/"
+}
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
