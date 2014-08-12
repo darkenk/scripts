@@ -35,7 +35,7 @@ function dgoToConfig {
 }
 
 function deditScripts {
-    vim ${DCUR_WORKSPACE_DIR}
+    mc ${DCUR_WORKSPACE_DIR}
 }
 
 function dgetCurrentDir {
@@ -55,6 +55,12 @@ function dloadScripts {
     done
 }
 
+function daddAlias {
+    alias | grep "${1}" && echo "You override previously created alias. See above";
+    echo "alias ${1}='${2}'" >> ${DCUR_WORKSPACE_DIR}/setup_env.sh
+    alias ${1}="${2}"
+}
+
 dsave_function () {
     local ORIG_FUNC=$(declare -f $1)
     local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
@@ -71,6 +77,20 @@ dhighlight () {
 function dconvert_to_eclipse() {
     local path=$(dgetCurrentDir)
     source ${path}/../../android/convert_to_eclipse.sh $@
+}
+
+function dcommandDescription {
+    echo ${1} - ${2}
+}
+
+function dhelp {
+    dcommandDescription deditConfig "edit current config"
+    dcommandDescription dgoToConfig "goes to config directory"
+    dcommandDescription deditScripts "launch mc for editing all scripts in config directory"
+    dcommandDescription dgetCurrentDir "returns current directory, usefull for scripts"
+    dcommandDescription dloadScripts "helper function for loading scripts from directory passed as arg"
+    dcommandDescription dhighlight "similar to grep, but only highlight search word"
+    dcommandDescription daddAlias "add alias to current configuration"
 }
 
 alias ls='ls --color=auto'

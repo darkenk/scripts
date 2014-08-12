@@ -1,0 +1,11 @@
+# put this into .bashrc for zenburn in mc
+export TERM=xterm-256color
+
+# enable vim in mc
+export EDITOR=/usr/bin/vim
+
+# put zenburn ini into:
+cp zenburn.ini ~/.local/share/mc/skins/
+
+# modify ~/.config/mc/ini
+skin=zenburn
