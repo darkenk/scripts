@@ -1,0 +1,48 @@
+" force to use local .vimrc if present
+set exrc
+set secure
+
+" install pathogen
+execute pathogen#infect()
+
+" syntax highlight
+syntax on
+filetype plugin indent on
+
+" display white charactesrs
+set listchars=tab:>-,trail:~,extends:>,precedes:<
+set list
+
+" turn on indentation
+set autoindent
+
+" display filename
+set modeline
+set ls=2
+
+" disable asking for .ycm_extra_conf.py
+let g:ycm_confirm_extra_conf = 0
+
+" enable zenburn
+colors zenburn
+set t_Co=256
+
+" enable git markers
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_escape_grep = 1
+
+" enable highlithning current line
+set cursorline
+
+" project specific
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" put color line at 100
+set colorcolumn=100
+highlight ColorColumn ctermbg=darkgreen
+
+" enable NERDTree - put this into project .vimrc
+"autocmd vimenter * NERDTree
