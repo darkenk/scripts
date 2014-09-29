@@ -88,3 +88,8 @@ fi
 if [ ! -e ~/.vim/bundle/indentLine ]; then
     git clone https://github.com/Yggdroot/indentLine.git ~/.vim/bundle/indentLine
 fi
+
+# Install vim autoindent detection
+if [ ! -e ~/.vim/bundle/vim-sleuth ]; then
+    git clone https://github.com/tpope/vim-sleuth.git ~/.vim/bundle/vim-sleuth
+fi
