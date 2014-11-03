@@ -7,4 +7,5 @@ for i in `grep -rl "OnlyShowIn.*GNOME" /etc/xdg/autostart/`
 do
     sudo sed -i -e 's/OnlyShowIn=.*/&Awesome;/' $i
 done
-cp ./rc.lua ~/.config/awesome
+mkdir -p ~/.config/awesome/
+ln -s `pwd`/rc3.4.lua ~/.config/awesome/
