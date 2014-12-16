@@ -27,15 +27,22 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "${DIR}/../../../general.sh"
+source "${DIR}/../../../android/scripts.sh"
+
+export USE_CCACHE=1
 
 # Setup title for terminator
 echo -en "\e]0;${DCUR_WORKSPACE}\a"
 
-export PS1="\[\e[1;32m\]${debian_chroot:+($debian_chroot)}\u@${DCUR_WORKSPACE}:\w\$ \[\e[0m\]"
+# go to jabol dir
+cd ~/workspace/projects/bbb/aosp/
 
-export CC=~/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-
-export DISK=/dev/mmcblk0
+# setup android build environment
+. build/envsetup.sh
 
-cd ~/workspace/projects/bbb/mine/
+# last android lunch
+dandroid_lunch
 
-alias rebuild_kernel="make -j8 ARCH=arm LOCALVERSION=-bone5 CROSS_COMPILE=/home/darkenk/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-  zImage modules"
+# set bash prompt
+PS1="\[\033[01;32m\]${TARGET_PRODUCT}-${TARGET_BUILD_VARIANT}\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+

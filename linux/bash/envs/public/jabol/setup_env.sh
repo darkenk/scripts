@@ -29,11 +29,13 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "${DIR}/../../../general.sh"
 source "${DIR}/../../../android/scripts.sh"
 
+export USE_CCACHE=1
+
 # Setup title for terminator
 echo -en "\e]0;${DCUR_WORKSPACE}\a"
 
 # go to jabol dir
-cd ~/workspace/jabol/
+cd ~/workspace/projects/jabol/
 
 # setup android build environment
 . build/envsetup.sh

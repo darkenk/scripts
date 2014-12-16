@@ -24,8 +24,12 @@ set ls=2
 let g:ycm_confirm_extra_conf = 0
 
 " enable zenburn
-colors zenburn
-set t_Co=256
+" colors zenburn
+" set t_Co=256
+
+" enable solarized
+set background=light
+colorscheme solarized
 
 " enable git markers
 let g:gitgutter_sign_column_always = 1

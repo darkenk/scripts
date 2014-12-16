@@ -93,3 +93,8 @@ fi
 if [ ! -e ~/.vim/bundle/vim-sleuth ]; then
     git clone https://github.com/tpope/vim-sleuth.git ~/.vim/bundle/vim-sleuth
 fi
+
+# Install solarized
+if [ ! -e ~/.vim/bundle/vim-colors-solarized ]; then
+    git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
+fi
