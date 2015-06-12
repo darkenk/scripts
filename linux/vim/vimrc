@@ -28,7 +28,7 @@ let g:ycm_confirm_extra_conf = 0
 " set t_Co=256
 
 " enable solarized
-set background=light
+set background=dark
 colorscheme solarized
 
 " enable git markers
