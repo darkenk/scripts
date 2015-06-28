@@ -31,11 +31,17 @@ source "${DIR}/../../../general.sh"
 # Setup title for terminator
 echo -en "\e]0;${DCUR_WORKSPACE}\a"
 
-export PS1="\[\e[1;32m\]${debian_chroot:+($debian_chroot)}\u@${DCUR_WORKSPACE}:\w\$ \[\e[0m\]"
+export PS1="\[\e[0;44m\]${debian_chroot:+($debian_chroot)}\u@${DCUR_WORKSPACE}:\w\$\[\e[0m\] "
 
-export CC=~/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-
-export DISK=/dev/mmcblk0
+#export CC=~/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-
+#export DISK=/dev/mmcblk0
 
-cd ~/workspace/projects/bbb/mine/
+export DK_BBB_HOME=/home/darkenk/workspace/projects/bbb
 
-alias rebuild_kernel="make -j8 ARCH=arm LOCALVERSION=-bone5 CROSS_COMPILE=/home/darkenk/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-  zImage modules"
+export KBUILD_OUTPUT=${DK_BBB_HOME}/u-boot_build
+export ARCH=arm
+export CROSS_COMPILE=arm-linux-gnueabihf-
+
+cd ~/workspace/projects/bbb/
+
+#alias rebuild_kernel="make -j8 ARCH=arm LOCALVERSION=-bone5 CROSS_COMPILE=/home/darkenk/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-  zImage modules"
