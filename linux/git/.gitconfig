@@ -1,0 +1,13 @@
+[color]
+    ui = auto
+
+[core]
+    editor = vim
+
+[log]
+    decorate = full
+
+[alias]
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    l1 = log --pretty=format:'%C(yellow) %h %C(green) %cn %C(red) %ci %C(blue) %s' --no-merges
+
