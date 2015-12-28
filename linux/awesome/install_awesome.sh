@@ -13,4 +13,4 @@ do
     sudo sed -i -e 's/OnlyShowIn=.*/&Awesome;/' $i
 done
 mkdir -p ~/.config/awesome/
-ln -s `pwd`/rc3.4.lua ~/.config/awesome/rc.lua
+ln -s `pwd`/rc3.5.lua ~/.config/awesome/rc.lua
