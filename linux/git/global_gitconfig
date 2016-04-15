@@ -1,0 +1,11 @@
+[merge]
+    tool = vimdiff
+
+[core]
+    editor = vim
+
+[color]
+    branch = auto
+    ui = auto
+    status = auto
+
