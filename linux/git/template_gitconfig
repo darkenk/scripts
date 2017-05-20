@@ -1,0 +1,6 @@
+[user]
+    name = "First Last"
+    email = sample@example.com
+
+[include]
+    path = ~/workspace/scripts/linux/git/global_gitconfig

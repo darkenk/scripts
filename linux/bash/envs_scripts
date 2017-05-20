@@ -2,7 +2,7 @@ D_STARTUP_SCRIPT=setup_env.sh
 D_PRIVATE_ENV=private
 D_PUBLIC_ENV=public
 function dsetup_env {
-    if [ 1 -ne $# ]; then
+    if [ 1 -ge $# ]; then
         echo "Usage: dsetup_env workspace_name. Abort"
         return
     fi
@@ -16,6 +16,7 @@ function dsetup_env {
     fi
     export DCUR_WORKSPACE=$1
     export DCUR_WORKSPACE_DIR=$(dirname ${startup})
+    export DARGS=${@:2}
     echo "Starting new env with ${startup}"
     bash --rcfile "${startup}"
     unset DCUR_WORKSPACE

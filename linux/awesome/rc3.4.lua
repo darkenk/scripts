@@ -143,6 +143,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
+    awful.key({ modkey,           }, "u",     function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "y",     function () awful.screen.focus_relative(1) end),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.util.spawn("gnome-panel-control --run-dialog") end),
