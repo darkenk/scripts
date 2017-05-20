@@ -1,0 +1,74 @@
+{
+    "version": 1,
+    "kind": "project",
+    "id": "R.Plain Cpp CMake Application",
+    "category": "I.Projects",
+    "trDescription": "Creates a simple C++ application with gtest using CMake to build",
+    "trDisplayName": "DK Cmake plain app",
+    "trDisplayCategory": "Non-Qt Project",
+    "enabled": "%{JS: [ %{Plugins} ].indexOf('CMakeProjectManager') >= 0}",
+
+    "options":
+    [
+        { "key": "ProjectFile", "value": "%{CMakeFile}" },
+        { "key": "CMakeFile", "value": "%{ProjectDirectory}/CMakeLists.txt" },
+        { "key": "CppFileName", "value": "%{JS: 'main.' + Util.preferredSuffix('text/x-c++src')}" },
+        { "key": "IsTopLevelProject", "value": "%{JS: !'%{Exists:ProjectExplorer.Profile.Ids}'}" }
+    ],
+
+    "pages":
+    [
+        {
+            "trDisplayName": "Project Location",
+            "trShortTitle": "Location",
+            "typeId": "Project"
+        },
+
+        {
+            "trDisplayName": "Kit Selection",
+            "trShortTitle": "Kits",
+            "typeId": "Kits",
+            "enabled": "%{IsTopLevelProject}",
+            "data": { "projectFilePath": "%{ProjectFile}" }
+        },
+        {
+            "trDisplayName": "Project Management",
+            "trShortTitle": "Summary",
+            "typeId": "Summary"
+        }
+    ],
+    "generators":
+    [
+        {
+            "typeId": "File",
+            "data":
+            [
+                {
+                    "source": "CMakeLists.txt",
+                    "openAsProject": true
+                },
+                {
+                    "source": "src/main.cpp",
+                    "openInEditor": true
+                },
+                {
+                    "source": "src/CMakeLists.txt"
+                },
+                {
+                    "source": "test/main_test.cpp"
+                },
+                {
+                    "source": "test/CMakeLists.txt"
+                },
+                {
+                    "source": "cmake/modules/Finddk_utils.cmake"
+                },
+                {
+                    "source": "../git.ignore",
+                    "target": "%{ProjectDirectory}/.gitignore",
+                    "condition": "%{JS: ! %{IsSubproject} && '%{VersionControl}' === 'G.Git'}"
+                }
+            ]
+        }
+    ]
+}
