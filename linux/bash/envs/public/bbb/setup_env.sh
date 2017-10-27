@@ -33,15 +33,25 @@ echo -en "\e]0;${DCUR_WORKSPACE}\a"
 
 export PS1="\[\e[0;44m\]${debian_chroot:+($debian_chroot)}\u@${DCUR_WORKSPACE}:\w\$\[\e[0m\] "
 
-#export CC=~/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-
-#export DISK=/dev/mmcblk0
+#export CC=~/workspace/projects/bbb/bb-kernel/dl/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+export CC=arm-linux-gnueabihf-
+export DISK=/dev/mmcblk0
 
 export DK_BBB_HOME=/home/darkenk/workspace/projects/bbb
-
-export KBUILD_OUTPUT=${DK_BBB_HOME}/u-boot_build
+export INSTALL_MOD_PATH=~/workspace/projects/bbb/kernel/KERNEL/out
+export INSTALL_FW_PATH=${INSTALL_MOD_PATH}
+export INSTALL_DTBS_PATH=${INSTALL_MOD_PATH}
+#export KBUILD_OUTPUT=${DK_BBB_HOME}/u-boot_build
 export ARCH=arm
-export CROSS_COMPILE=arm-linux-gnueabihf-
+export CROSS_COMPILE=${CC}
+export LOADADDR=0x82000000
 
-cd ~/workspace/projects/bbb/
+export GRAPHICS_INSTALL_DIR=~/workspace/projects/bbb/kernel/ti-sdk-pvr/Graphics_SDK
+export KERNEL_INSTALL_DIR=~/workspace/projects/bbb/kernel/KERNEL
+export CSTOOL_PREFIX=${CC}
+export CSTOOL_DIR=/usr/
+export OMAPES=8.x
+
+cd ~/workspace/projects/bbb/kernel/KERNEL
 
 #alias rebuild_kernel="make -j8 ARCH=arm LOCALVERSION=-bone5 CROSS_COMPILE=/home/darkenk/workspace/projects/bbb/mine/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-  zImage modules"
