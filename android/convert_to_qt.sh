@@ -39,7 +39,7 @@ MAKE_OUTPUT="/tmp/convert_to_qt.txt"
 PROJECT_OUT=`dirname ${PROJECT_DIR}`/${PROJECT_NAME}
 echo "${PROJECT_OUT}"
 
-mmm -B showcommands ${PROJECT_DIR} &> ${MAKE_OUTPUT}
+mmm --dry-run -B showcommands ${PROJECT_DIR} &> ${MAKE_OUTPUT}
 
 mkdir -p ${PROJECT_OUT}
 
